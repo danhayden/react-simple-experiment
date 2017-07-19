@@ -8,6 +8,13 @@ const pkg = JSON.parse(fs.readFileSync('./package.json'))
 export default {
   entry: 'src/react-simple-experiment.js',
   moduleName: 'ReactSimpleExperiment',
+  external: ['react', 'prop-types', 'pick-one-by-weight', 'localforage'],
+  globals: {
+    react: 'React',
+    'prop-types': 'PropTypes',
+    'pick-one-by-weight': 'pickOneByWeight',
+    localforage: 'localforage'
+  },
   targets: [
     {dest: pkg.main, format: 'cjs'},
     {dest: pkg.module, format: 'es'},

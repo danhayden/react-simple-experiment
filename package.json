@@ -23,8 +23,10 @@
     "changelog": "standard-version",
     "size": "npx gzip-size-cli ./dist/react-simple-experiment.js ",
     "precommit": "lint-staged",
-    "prepush": "npm test",
-    "prepublish": "npm run build"
+    "prepush": "npm test && npm run build-storybook",
+    "prepublish": "npm run build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -o docs"
   },
   "lint-staged": {
     "src/**/*.{js,json}": [
@@ -35,8 +37,13 @@
   "peerDependencies": {
     "react": "^15.0.0-0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "localforage": "1.5.0",
+    "pick-one-by-weight": "1.0.2",
+    "prop-types": "15.5.10"
+  },
   "devDependencies": {
+    "@storybook/react": "3.1.9",
     "babel-eslint": "7.2.3",
     "babel-preset-env": "1.6.0",
     "babel-preset-react": "6.24.1",
@@ -55,6 +62,8 @@
     "lint-staged": "4.0.2",
     "prettier": "1.5.3",
     "prettier-eslint-cli": "4.1.1",
+    "react": "^15.0.0-0",
+    "react-dom": "15.6.1",
     "rollup": "0.45.2",
     "rollup-plugin-babel": "2.7.1",
     "rollup-plugin-node-resolve": "3.0.0",

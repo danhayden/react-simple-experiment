@@ -20,5 +20,24 @@ export default {
     {dest: pkg.module, format: 'es'},
     {dest: pkg['umd:main'], format: 'umd'}
   ],
-  plugins: [resolve(), babel({exclude: 'node_modules/**'}), uglify({}, minify)]
+  plugins: [
+    resolve(),
+    babel({
+      babelrc: false,
+      exclude: 'node_modules/**',
+      presets: [
+        [
+          'babel-preset-env',
+          {
+            modules: false,
+            loose: true,
+            targets: {browsers: ['last 2 versions', '> 1%']}
+          }
+        ],
+        'babel-preset-react',
+        'babel-preset-stage-2'
+      ]
+    }),
+    uglify({}, minify)
+  ]
 }

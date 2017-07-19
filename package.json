@@ -23,7 +23,7 @@
     "changelog": "standard-version",
     "size": "npx gzip-size-cli ./dist/react-simple-experiment.js ",
     "precommit": "lint-staged",
-    "prepush": "npm test && npm run build-storybook",
+    "prepush": "npm test",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs"
@@ -31,6 +31,7 @@
   "lint-staged": {
     "src/**/*.{js,json}": [
       "npm run lint",
+      "npm run build-storybook",
       "git add"
     ]
   },

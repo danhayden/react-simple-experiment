@@ -1,0 +1,74 @@
+{
+  "name": "react-simple-experiment",
+  "version": "0.0.0",
+  "description": "Simple A/B testing for React",
+  "keywords": [
+    "react",
+    "experiment",
+    "ab test"
+  ],
+  "author": "Dan Hayden <dan@tutonics.com>",
+  "license": "MIT",
+  "main": "dist/react-simple-experiment.js",
+  "module": "dist/react-simple-experiment.es.js",
+  "umd:main": "dist/react-simple-experiment.umd.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "lint": "prettier-eslint --write --no-semi --single-quote --no-bracket-spacing 'src/**/*.{js,json}'",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "changelog": "standard-version",
+    "size": "npx gzip-size-cli ./dist/react-simple-experiment.js ",
+    "precommit": "lint-staged",
+    "prepush": "npm test",
+    "prepublish": "npm run build"
+  },
+  "lint-staged": {
+    "src/**/*.{js,json}": [
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "peerDependencies": {
+    "react": "^15.0.0-0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-eslint": "7.2.3",
+    "babel-preset-env": "1.6.0",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "eslint": "4.2.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-config-standard-jsx": "4.0.2",
+    "eslint-import-resolver-node": "0.3.1",
+    "eslint-loader": "1.9.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-node": "5.1.1",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-react": "7.1.0",
+    "eslint-plugin-standard": "3.0.1",
+    "husky": "0.14.3",
+    "lint-staged": "4.0.2",
+    "prettier": "1.5.3",
+    "prettier-eslint-cli": "4.1.1",
+    "rollup": "0.45.2",
+    "rollup-plugin-babel": "2.7.1",
+    "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-uglify": "2.0.1",
+    "rollup-watch": "4.3.1",
+    "standard-version": "4.2.0",
+    "uglify-es": "3.0.25"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danhayden/react-simple-experiment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danhayden/react-simple-experiment/issues"
+  },
+  "homepage": "https://github.com/danhayden/react-simple-experiment#readme"
+}

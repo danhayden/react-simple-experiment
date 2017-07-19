@@ -1,11 +1,12 @@
 import localforage from 'localforage'
 
 let storage = {}
+let store
 
 function getItem (key) {
   return new Promise(resolve => {
     try {
-      localforage
+      store
         .getItem(key)
         .then(value => resolve(value || storage[key]))
         .catch(() => resolve(storage[key]))
@@ -21,7 +22,7 @@ function setItem (key, value) {
     try {
       // avoid clone error from localforage
       const safeValue = JSON.parse(JSON.stringify(value))
-      localforage.setItem(key, safeValue).then(resolve).catch(resolve)
+      store.setItem(key, safeValue).then(resolve).catch(resolve)
     } catch (error) {
       resolve()
     }
@@ -32,7 +33,7 @@ function removeItem (key) {
   if (storage[key]) delete storage[key]
   return new Promise(resolve => {
     try {
-      localforage.removeItem(key).then(resolve).catch(resolve)
+      store.removeItem(key).then(resolve).catch(resolve)
     } catch (error) {
       resolve()
     }
@@ -40,7 +41,7 @@ function removeItem (key) {
 }
 
 export default function (options) {
-  localforage.config(options)
+  store = localforage.createInstance(options)
   return {
     getItem,
     setItem,

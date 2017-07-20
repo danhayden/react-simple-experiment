@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/danhayden/react-simple-experiment/compare/v1.0.1...v1.1.0) (2017-07-20)
+
+
+### Features
+
+* make `onLoad` a required prop for `Experiment` component, add default `onLoad` function ([8339664](https://github.com/danhayden/react-simple-experiment/commit/8339664))
+* only update if variant changes ([1fda059](https://github.com/danhayden/react-simple-experiment/commit/1fda059))
+* pick variant before mount to avoid unnecessary render call ([ace0249](https://github.com/danhayden/react-simple-experiment/commit/ace0249))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/danhayden/react-simple-experiment/compare/v1.0.0...v1.0.1) (2017-07-19)
 

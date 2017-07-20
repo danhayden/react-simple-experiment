@@ -22,7 +22,7 @@
     "dev": "rollup -c -w",
     "changelog": "standard-version",
     "size": "npx gzip-size-cli ./dist/react-simple-experiment.js ",
-    "precommit": "npm run build-storybook && lint-staged",
+    "precommit": "lint-staged",
     "prepush": "npm test",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006",

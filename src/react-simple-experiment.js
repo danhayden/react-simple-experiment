@@ -19,7 +19,7 @@ export class Experiment extends React.Component {
 
   state = {variant: null}
 
-  componentDidMount () {
+  componentWillMount () {
     const storageName = `experiment--${this.props.name}`
     const variantNames = []
     const data = {}
@@ -36,17 +36,20 @@ export class Experiment extends React.Component {
       }
 
       this.setState({variant}, () => {
-        this.props.onLoad(this.props.name, this.state.variant)
+        this.props.onLoad(this.props.name, variant)
       })
     })
   }
 
   render () {
-    if (!this.props.children) return null
-    const variant = this.props.children.find(
-      child => child.props.name === this.state.variant
-    )
-    return variant || null
+    if (!this.state.variant) {
+      return null
+    } else {
+      const variant = this.props.children.find(
+        child => child.props.name === this.state.variant
+      )
+      return variant || null
+    }
   }
 }
 

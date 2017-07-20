@@ -10,7 +10,11 @@ export class Experiment extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     children: PropTypes.array.isRequired,
-    onLoad: PropTypes.func
+    onLoad: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    onLoad: () => {}
   }
 
   state = {variant: null}

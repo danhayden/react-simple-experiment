@@ -17,9 +17,10 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "lint": "prettier-eslint --write --no-semi --single-quote --no-bracket-spacing 'src/**/*.{js,json}'",
+    "lint": "npm run prettier-eslint -- 'src/**/*.{js,json}'",
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "prettier-eslint": "prettier-eslint --write --no-semi --single-quote --no-bracket-spacing",
     "changelog": "standard-version",
     "size": "npx gzip-size-cli ./dist/react-simple-experiment.js ",
     "precommit": "lint-staged",
@@ -30,7 +31,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,json}": [
-      "npm run lint",
+      "npm run prettier-eslint",
       "git add"
     ]
   },

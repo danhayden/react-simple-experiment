@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/danhayden/react-simple-experiment/compare/v1.1.0...v1.1.1) (2017-07-25)
+
+
+### Bug Fixes
+
+* select new variant if one returned from storage has weight of 0 ([c0522ae](https://github.com/danhayden/react-simple-experiment/commit/c0522ae))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/danhayden/react-simple-experiment/compare/v1.0.1...v1.1.0) (2017-07-20)
 

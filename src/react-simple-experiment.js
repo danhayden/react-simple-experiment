@@ -30,7 +30,7 @@ export class Experiment extends React.Component {
     })
 
     storage.getItem(storageName).then(variant => {
-      if (!variant || !variantNames.includes(variant)) {
+      if (!variant || !variantNames.includes(variant) || data[variant] < 1) {
         variant = pickOneByWeight(data)
         storage.setItem(storageName, variant)
       }

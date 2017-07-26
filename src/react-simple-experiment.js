@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import pickOneByWeight from 'pick-one-by-weight'
+import pickByWeight from './pick-by-weight'
 import Storage from './storage'
 
 const storage = Storage({name: 'react-simple-experiment'})
@@ -31,7 +31,7 @@ export class Experiment extends React.Component {
 
     storage.getItem(storageName).then(variant => {
       if (!variant || !variantNames.includes(variant) || data[variant] < 1) {
-        variant = pickOneByWeight(data)
+        variant = pickByWeight(data)
         storage.setItem(storageName, variant)
       }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import queryString from 'query-string'
 import pickByWeight from './pick-by-weight'
 import Storage from './storage'
 
@@ -10,34 +11,55 @@ export class Experiment extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     children: PropTypes.array.isRequired,
-    onLoad: PropTypes.func.isRequired
+    onLoad: PropTypes.func.isRequired,
+    storageName: PropTypes.string,
+    querystringName: PropTypes.string
   }
 
   static defaultProps = {
-    onLoad: () => {}
+    onLoad: () => {},
+    querystringName: 'experiment-variant'
   }
 
   state = {variant: null}
 
   componentWillMount () {
-    const storageName = `experiment--${this.props.name}`
+    this.storageName = `experiment--${this.props.name}`
+    this.pickVariant()
+  }
+
+  pickVariant = () => {
+    const querystring = queryString.parse(window.location.search)
+    const queryVariant = querystring[this.props.querystringName]
+    if (queryVariant) {
+      this.setVariant(queryVariant)
+    } else {
+      storage.getItem(this.storageName).then(this.setVariant)
+    }
+  }
+
+  getVariantData = () => {
     const variantNames = []
     const data = {}
-
     React.Children.forEach(this.props.children, variant => {
       variantNames.push(variant.props.name)
       data[variant.props.name] = parseInt(variant.props.weight, 10)
     })
+    return {data, variantNames}
+  }
 
-    storage.getItem(storageName).then(variant => {
-      if (!variant || !variantNames.includes(variant) || data[variant] < 1) {
-        variant = pickByWeight(data)
-        storage.setItem(storageName, variant)
-      }
+  setVariant = variant => {
+    const {data, variantNames} = this.getVariantData()
+    if (!variant || !variantNames.includes(variant) || data[variant] < 1) {
+      variant = pickByWeight(data)
+      storage.setItem(this.storageName, variant)
+    }
+    this.activateVariant(variant)
+  }
 
-      this.setState({variant}, () => {
-        this.props.onLoad(this.props.name, variant)
-      })
+  activateVariant = variant => {
+    this.setState({variant}, () => {
+      this.props.onLoad(this.props.name, variant)
     })
   }
 

@@ -64,7 +64,7 @@ export class Experiment extends React.Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    return nextState.variant !== this.state.variant
+    return true
   }
 
   render () {

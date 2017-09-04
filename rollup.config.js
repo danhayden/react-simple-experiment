@@ -7,8 +7,13 @@ import fs from 'fs'
 const pkg = JSON.parse(fs.readFileSync('./package.json'))
 
 export default {
-  entry: 'src/react-simple-experiment.js',
-  moduleName: 'ReactSimpleExperiment',
+  name: 'ReactSimpleExperiment',
+  input: 'src/react-simple-experiment.js',
+  output: [
+    {format: 'es', file: pkg.module},
+    {format: 'cjs', file: pkg.main},
+    {format: 'umd', file: pkg['umd:main']}
+  ],
   external: ['react', 'prop-types', 'pick-one-by-weight', 'localforage'],
   globals: {
     react: 'React',
@@ -16,11 +21,6 @@ export default {
     'pick-one-by-weight': 'pickOneByWeight',
     localforage: 'localforage'
   },
-  targets: [
-    {dest: pkg.main, format: 'cjs'},
-    {dest: pkg.module, format: 'es'},
-    {dest: pkg['umd:main'], format: 'umd'}
-  ],
   plugins: [
     resolve(),
     commonjs(),
@@ -38,7 +38,8 @@ export default {
         ],
         'babel-preset-react',
         'babel-preset-stage-2'
-      ]
+      ],
+      plugins: ['external-helpers']
     }),
     uglify({}, minify)
   ]

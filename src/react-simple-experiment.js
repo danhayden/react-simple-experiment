@@ -52,9 +52,10 @@ export class Experiment extends React.Component {
     const {data, variantNames} = this.getVariantData()
     if (!variant || !variantNames.includes(variant) || data[variant] < 1) {
       variant = pickByWeight(data)
-      storage.setItem(this.storageName, variant)
     }
-    this.activateVariant(variant)
+    storage.setItem(this.storageName, variant).then(() => {
+      this.activateVariant(variant)
+    })
   }
 
   activateVariant = variant => {

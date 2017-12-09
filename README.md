@@ -2,7 +2,6 @@
 
 [![version][version]](http://npm.im/react-simple-experiment)
 [![MIT License][MIT License]](http://opensource.org/licenses/MIT)
-[![Standard][Standard]](http://standardjs.com)
 [![Standard Version][Standard Version]](https://github.com/conventional-changelog/standard-version)
 [![Size][Size]](https://unpkg.com/react-simple-experiment)
 [![Size gzip][Size gzip]](https://unpkg.com/react-simple-experiment)
@@ -51,7 +50,6 @@ MIT
 
 [version]: https://img.shields.io/npm/v/react-simple-experiment.svg
 [MIT License]: https://img.shields.io/npm/l/react-simple-experiment.svg
-[Standard]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg
 [Standard Version]: https://img.shields.io/badge/release-standard%20version-brightgreen.svg
 [Size]: https://badges.herokuapp.com/size/npm/react-simple-experiment
 [Size gzip]: https://badges.herokuapp.com/size/npm/react-simple-experiment?gzip=true

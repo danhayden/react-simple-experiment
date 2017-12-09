@@ -23,7 +23,7 @@ export default {
   },
   plugins: [
     resolve(),
-    commonjs(),
+    commonjs({exclude: 'src/**'}),
     babel({
       babelrc: false,
       exclude: 'node_modules/**',

@@ -1,8 +1,11 @@
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['standard', 'standard-jsx'],
-  rules: {
-    'react/jsx-indent': [0],
-    'object-curly-spacing': [2]
+  extends: ['unobtrusive', 'unobtrusive/react'],
+  env: {
+    browser: true,
+    node: true
+  },
+  globals: {
+    Promise: true
   }
 }

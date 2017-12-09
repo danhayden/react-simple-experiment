@@ -12,7 +12,6 @@ export class Experiment extends React.Component {
     name: PropTypes.string.isRequired,
     children: PropTypes.array.isRequired,
     onLoad: PropTypes.func.isRequired,
-    storageName: PropTypes.string,
     querystringName: PropTypes.string
   }
 
@@ -23,7 +22,7 @@ export class Experiment extends React.Component {
 
   state = {variant: null}
 
-  componentWillMount () {
+  componentWillMount() {
     this.storageName = `experiment--${this.props.name}`
     this.pickVariant()
   }
@@ -64,18 +63,21 @@ export class Experiment extends React.Component {
     })
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return true
   }
 
-  render () {
+  getVariant = () => {
+    return this.props.children.find(
+      child => child.props.name === this.state.variant
+    )
+  }
+
+  render() {
     if (!this.state.variant) {
       return null
     } else {
-      const variant = this.props.children.find(
-        child => child.props.name === this.state.variant
-      )
-      return variant || null
+      return this.getVariant() || null
     }
   }
 }
@@ -88,7 +90,7 @@ export class Variant extends React.Component {
     children: PropTypes.node
   }
 
-  render () {
+  render() {
     return this.props.children
   }
 }

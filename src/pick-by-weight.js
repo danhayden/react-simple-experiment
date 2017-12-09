@@ -1,6 +1,6 @@
 import isFinite from 'is-finite'
 
-export default function pickOneByWeight (anObj) {
+export default function pickOneByWeight(anObj) {
   let _keys = Object.keys(anObj)
   const sum = _keys.reduce((p, c) => p + anObj[c], 0)
   if (!isFinite(sum)) {

@@ -1,8 +1,8 @@
-import React from 'react'
-import {storiesOf} from '@storybook/react'
-import {Experiment, Variant} from './react-simple-experiment'
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import { Experiment, Variant } from "./react-simple-experiment";
 
-storiesOf('React Simple Experiment', module).add('Default variation', () => (
+storiesOf("React Simple Experiment", module).add("Default variation", () => (
   <Experiment
     name="storybook-test"
     onLoad={(name, variant) => console.log(name, variant)}
@@ -19,4 +19,4 @@ storiesOf('React Simple Experiment', module).add('Default variation', () => (
       <div>Variant3</div>
     </Variant>
   </Experiment>
-))
+));

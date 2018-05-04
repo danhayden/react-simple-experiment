@@ -1,6 +1,12 @@
 module.exports = {
-  parser: 'babel-eslint',
-  extends: ['unobtrusive', 'unobtrusive/react'],
+  parser: "babel-eslint",
+  extends: [
+    "plugin:react/recommended",
+    "standard",
+    "prettier",
+    "prettier/react",
+    "prettier/standard"
+  ],
   env: {
     browser: true,
     node: true
@@ -8,4 +14,4 @@ module.exports = {
   globals: {
     Promise: true
   }
-}
+};

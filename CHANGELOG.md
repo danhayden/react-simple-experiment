@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/danhayden/react-simple-experiment/compare/v2.0.0...v2.1.0) (2018-05-09)
+
+
+### Features
+
+* add ability to pass a component to ExperimentManager ([9cbdf51](https://github.com/danhayden/react-simple-experiment/commit/9cbdf51))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/danhayden/react-simple-experiment/compare/v1.2.3...v2.0.0) (2018-05-08)
 

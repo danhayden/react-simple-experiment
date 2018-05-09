@@ -82,73 +82,96 @@ The render function exposes the following four functions:
 ```js
 getExperiments().then(experiments => {
   console.log(experiments);
+  /*
+    {
+      "experimentId1": {
+        "activeVariant": "control",
+        "variants": {
+          "control": 50,
+          "variant1": 50
+        }
+      },
+      "experimentId2": {
+        "activeVariant": "variant1",
+        "variants": {
+          "control": 50,
+          "variant1": 50
+        }
+      }
+    }
+  */
 });
-// { experimentId1: variantId, experimentId2: variantId, ... }
 
 getExperiment(experimentId).then(variantId => {
   console.log(variantId);
+  // variantId
 });
-// variantId
 
 setExperiment(experimentId, variantId).then(variantId => {
   console.log(variantId);
+  // variantId
 });
-// variantId
 
 removeExperiment(experimentId).then(undefined => {});
 ```
 
-and can be used within a component like so:
+and can be used within a component as a render prop like so:
 
 ```js
 import { ExperimentManager } from "react-simple-experiment";
 
 export default function MyExperimentManager() {
   return (
-    <ExperimentManager>
-      {({ getExperiments, getExperiment, setExperiment, removeExperiment }) => (
-        <div>
-          <button
-            onClick={() => {
-              getExperiments().then(data => {
-                console.log(data);
-              });
-            }}
-          >
-            Get Experiments
-          </button>
-          <button
-            onClick={() => {
-              getExperiment("test").then(data => {
-                console.log(data);
-              });
-            }}
-          >
-            Get "test" experiment
-          </button>
-          <button
-            onClick={() => {
-              setExperiment("test", "control").then(data => {
-                console.log(data);
-              });
-            }}
-          >
-            Set "test" experiment to "control"
-          </button>
-          <button
-            onClick={() => {
-              removeExperiment("test").then(data => {
-                console.log(data);
-              });
-            }}
-          >
-            Remove "test" experiment
-          </button>
-        </div>
-      )}
-    </ExperimentManager>
+    <ExperimentManager
+      render={({
+        getExperiments,
+        getExperiment,
+        setExperiment,
+        removeExperiment
+      }) => {
+        return /* custom logic.. */;
+      }}
+    />
   );
 }
+```
+
+or you can pass it a component to enable using lifecycle methods:
+
+```js
+import { ExperimentManager } from "react-simple-experiment";
+
+export default function MyExperimentManager() {
+  state = {
+    experiments: null
+  };
+
+  componentDidMount() {
+    this.getExperiments();
+  }
+
+  getExperiments = (reload = false) => {
+    this.props.getExperiments().then(experiments => {
+      this.setState(() => ({ experiments })
+      );
+    });
+  };
+
+  render () {
+    return (
+      <div>
+        {JSON.stringify(this.state.experiments, null, 2)}
+      </div>
+    );
+  };
+}
+
+export default props => (
+  <ExperimentManager
+    location={props.location}
+    component={MyExperimentManager}
+    {...props} />
+);
 ```
 
 ### License

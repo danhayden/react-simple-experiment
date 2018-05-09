@@ -138,15 +138,17 @@ export class ExperimentManager extends Component {
   static propTypes = {
     location: PropTypes.object.isRequired,
     querystringName: PropTypes.string,
+    component: PropTypes.func,
     render: PropTypes.func,
     show: PropTypes.bool,
     children: (props, propName, componentName) => {
       if (
         typeof props[propName] !== "function" &&
+        typeof props["component"] !== "function" &&
         typeof props["render"] !== "function"
       ) {
         return new Error(
-          `Please provide a render function as the \`children\` or \`render\` prop of ${componentName}`
+          `Please provide either a render function as the \`children\` or \`render\` prop of ${componentName} or a component as the \`component\` prop`
         );
       }
     }
@@ -176,18 +178,16 @@ export class ExperimentManager extends Component {
   };
 
   getExperiment = experimentId => {
-    return storage.getItem(experimentId);
+    return storage.getItem("experiment--" + experimentId);
   };
 
   setExperiment = (experimentId, variantId) => {
-    return storage.setItem(experimentId, variantId);
+    return storage.setItem("experiment--" + experimentId, variantId);
   };
 
   removeExperiment = experimentId => {
-    return storage.removeItem(experimentId);
+    return storage.removeItem("experiment--" + experimentId);
   };
-
-  getExperimentparams = () => {};
 
   shouldShowManager = () => {
     const { show, location, querystringName } = this.props;
@@ -195,15 +195,21 @@ export class ExperimentManager extends Component {
   };
 
   render() {
-    const renderProp = this.props.children || this.props.render;
-    return this.shouldShowManager()
-      ? renderProp({
-          getExperiments: this.getExperiments,
-          getExperiment: this.getExperiment,
-          setExperiment: this.setExperiment,
-          removeExperiment: this.removeExperiment
-        })
-      : null;
+    const { children, render, component } = this.props;
+    const renderProp = children || render;
+    const props = {
+      getExperiments: this.getExperiments,
+      getExperiment: this.getExperiment,
+      setExperiment: this.setExperiment,
+      removeExperiment: this.removeExperiment
+    };
+
+    const shouldShowManager = this.shouldShowManager();
+
+    if (!shouldShowManager) return null;
+    if (typeof renderProp === "function") return renderProp(props);
+    if (component) return React.createElement(component, props);
+    return null;
   }
 }
 

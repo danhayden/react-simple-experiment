@@ -5,6 +5,8 @@ import pickByWeight from "./pick-by-weight";
 import Storage from "./storage";
 
 const storage = Storage({ name: "react-simple-experiment" });
+const experimentStoragePrefix = "experiment--";
+const variantsStoragePrefix = "variants--";
 
 export class Experiment extends React.Component {
   static displayName = "Experiment";
@@ -21,8 +23,8 @@ export class Experiment extends React.Component {
   state = { variant: null };
 
   componentDidMount() {
-    this.experimentStorageName = `experiment--${this.props.name}`;
-    this.variantsStorageName = `variants--${this.props.name}`;
+    this.experimentStorageName = experimentStoragePrefix + this.props.name;
+    this.variantsStorageName = variantsStoragePrefix + this.props.name;
     this.variants = this.getVariantData();
     this.storePossibleVariants();
     this.pickVariant();
@@ -123,7 +125,7 @@ export class ExperimentQueryString extends Component {
     const { querystringDivider } = this.props;
     for (const param in params) {
       const [experimentId, variantId] = params[param].split(querystringDivider);
-      storage.setItem(experimentId, variantId);
+      storage.setItem(experimentStoragePrefix + experimentId, variantId);
     }
   };
 
@@ -178,15 +180,15 @@ export class ExperimentManager extends Component {
   };
 
   getExperiment = experimentId => {
-    return storage.getItem("experiment--" + experimentId);
+    return storage.getItem(experimentStoragePrefix + experimentId);
   };
 
   setExperiment = (experimentId, variantId) => {
-    return storage.setItem("experiment--" + experimentId, variantId);
+    return storage.setItem(experimentStoragePrefix + experimentId, variantId);
   };
 
   removeExperiment = experimentId => {
-    return storage.removeItem("experiment--" + experimentId);
+    return storage.removeItem(experimentStoragePrefix + experimentId);
   };
 
   shouldShowManager = () => {

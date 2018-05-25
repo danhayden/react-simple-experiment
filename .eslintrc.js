@@ -12,6 +12,15 @@ module.exports = {
     node: true
   },
   globals: {
-    Promise: true
+    before: true,
+    beforeEach: true,
+    after: true,
+    afterEach: true,
+    describe: true,
+    expect: true,
+    it: true,
+    jest: true,
+    Promise: true,
+    test: true
   }
 };

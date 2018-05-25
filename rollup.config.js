@@ -14,7 +14,7 @@ const globals = {
 };
 
 export default {
-  input: "src/react-simple-experiment.js",
+  input: "src/index.js",
   output: [
     { name, globals, format: "es", file: pkg.module },
     { name, globals, format: "cjs", file: pkg.main },
@@ -32,7 +32,6 @@ export default {
           "babel-preset-env",
           {
             modules: false,
-            loose: true,
             targets: {
               browsers: [
                 "last 2 Chrome versions",

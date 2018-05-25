@@ -17,39 +17,36 @@
   ],
   "scripts": {
     "start": "rollup -c -w",
-    "test": "echo \"Error: no test specified\"",
-    "lint": "prettier 'src/**/*.{js,json}' --write",
     "build": "rollup -c",
-    "release": "standard-version",
-    "size": "npx gzip-size-cli ./dist/react-simple-experiment.js ",
-    "precommit": "lint-staged",
-    "prepush": "npm test",
-    "prepublish": "npm run build",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o docs"
+    "test": "jest --notify",
+    "lint": "prettier 'src/**/*.{js,json}' --write",
+    "size": "npx gzip-size-cli ./dist/react-simple-experiment.js",    
+    "checks": "npm run build && npm run test && npm run lint",
+    "release": "npm run checks && npx standard-version",
+    "betarelease": "npm run checks && npx standard-version --prerelease beta"
   },
-  "lint-staged": {
-    "src/**/*.{js,json}": [
-      "prettier --list-different --log-level error"
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ]
   },
   "peerDependencies": {
-    "react": ">=15"
+    "react": ">=16.3"
   },
   "dependencies": {
-    "is-finite": "1.0.2",
     "localforage": "1.7.1",
-    "prop-types": "15.6.1",
-    "query-string": "5.0.1"
+    "prop-types": "15.6.1"
   },
   "devDependencies": {
-    "@storybook/react": "3.4.6",
     "babel-core": "6.26.3",
     "babel-eslint": "8.2.3",
     "babel-plugin-external-helpers": "6.22.0",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "enzyme-to-json": "3.3.4",
     "eslint": "4.19.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-config-standard": "11.0.0",
@@ -58,7 +55,8 @@
     "eslint-plugin-promise": "3.8.0",
     "eslint-plugin-react": "7.8.2",
     "eslint-plugin-standard": "3.1.0",
-    "husky": "0.14.3",
+    "jest": "23.0.1",
+    "jest-cli": "23.0.1",
     "lint-staged": "7.1.2",
     "prettier": "1.13.2",
     "react": "16.4.0",
@@ -69,7 +67,6 @@
     "rollup-plugin-node-resolve": "3.3.0",
     "rollup-plugin-terser": "1.0.1",
     "rollup-watch": "4.3.1",
-    "standard-version": "4.4.0",
     "uglify-es": "3.3.9"
   },
   "repository": {

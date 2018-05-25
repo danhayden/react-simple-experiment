@@ -1,16 +1,18 @@
-import isFinite from "is-finite";
+export function pickByWeight(data) {
+  const keys = Object.keys(data);
+  const sum = keys.reduce((result, key) => result + data[key], 0);
+  const isInteger = typeof sum === "number" && sum % 1 === 0;
 
-export default function pickOneByWeight(anObj) {
-  let _keys = Object.keys(anObj);
-  const sum = _keys.reduce((p, c) => p + anObj[c], 0);
-  if (!isFinite(sum)) {
-    throw new Error("All values in object must be a numeric value");
+  if (!isInteger) {
+    throw new Error("All values in data must be integers");
   }
-  let choose = ~~(Math.random() * sum);
-  for (let i = 0, count = 0; i < _keys.length; i++) {
-    count += anObj[_keys[i]];
+
+  const choose = ~~(Math.random() * sum);
+
+  for (let i = 0, count = 0; i < keys.length; i++) {
+    count += data[keys[i]];
     if (count > choose) {
-      return _keys[i];
+      return keys[i];
     }
   }
 }

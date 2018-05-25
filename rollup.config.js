@@ -1,7 +1,7 @@
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
-import uglify from "rollup-plugin-uglify";
+import { terser } from "rollup-plugin-terser";
 import { minify } from "uglify-es";
 import fs from "fs";
 const pkg = JSON.parse(fs.readFileSync("./package.json"));
@@ -10,27 +10,17 @@ const name = "react-simple-experiment";
 const globals = {
   react: "React",
   "prop-types": "PropTypes",
-  "pick-one-by-weight": "pickOneByWeight",
   localforage: "localforage"
 };
 
 export default {
-  output: {
-    name: "ReactSimpleExperiment",
-    globals: {
-      react: "React",
-      "prop-types": "PropTypes",
-      "pick-one-by-weight": "pickOneByWeight",
-      localforage: "localforage"
-    }
-  },
   input: "src/react-simple-experiment.js",
   output: [
     { name, globals, format: "es", file: pkg.module },
     { name, globals, format: "cjs", file: pkg.main },
     { name, globals, format: "umd", file: pkg["umd:main"] }
   ],
-  external: ["react", "prop-types", "pick-one-by-weight", "localforage"],
+  external: Object.keys(globals),
   plugins: [
     resolve(),
     commonjs({ exclude: "src/**" }),
@@ -59,6 +49,6 @@ export default {
       ],
       plugins: ["external-helpers"]
     }),
-    uglify({}, minify)
+    terser({}, minify)
   ]
 };

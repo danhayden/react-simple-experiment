@@ -1,6 +1,6 @@
 {
   "name": "react-simple-experiment",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Simple A/B testing for React",
   "keywords": [
     "react",
@@ -20,7 +20,7 @@
     "build": "rollup -c",
     "test": "jest --notify",
     "lint": "prettier 'src/**/*.{js,json}' --write",
-    "size": "npx gzip-size-cli ./dist/react-simple-experiment.js",    
+    "size": "npx gzip-size-cli ./dist/react-simple-experiment.js",
     "checks": "npm run build && npm run test && npm run lint",
     "release": "npm run checks && npx standard-version",
     "betarelease": "npm run checks && npx standard-version --prerelease beta"

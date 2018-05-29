@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/danhayden/react-simple-experiment/compare/v2.1.1...v3.0.0) (2018-05-29)
+
+
+### Features
+
+* increase test flexibility with new exports; ExperimentProvider, ExperimentConsumer, withExperiments, ActiveVariant ([4d704f7](https://github.com/danhayden/react-simple-experiment/commit/4d704f7))
+
+
+### BREAKING CHANGES
+
+* requires React 16.3+
+* removal of `ExperimentManager`
+* removal of `ExperimentQueryString`
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/danhayden/react-simple-experiment/compare/v2.1.0...v2.1.1) (2018-05-09)
 

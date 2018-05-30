@@ -67,11 +67,20 @@ class ExperimentProvider extends Component {
       .then(this.getExperiments);
   };
 
+  getActiveVariant = experimentId => {
+    const { experiments } = this.state;
+    const experimentIds = Object.keys(experiments);
+    return experimentIds.includes(experimentId)
+      ? experiments[experimentId].activeVariant
+      : null;
+  };
+
   state = {
     experiments: {},
     createExperiment: this.createExperiment,
     removeExperiment: this.removeExperiment,
-    setExperimentVariant: this.setExperimentVariant
+    setExperimentVariant: this.setExperimentVariant,
+    getActiveVariant: this.getActiveVariant
   };
 
   componentDidMount() {
@@ -169,6 +178,7 @@ function withExperiments(WrappedComponent) {
               createExperiment={context.createExperiment}
               removeExperiment={context.removeExperiment}
               setExperimentVariant={context.setExperimentVariant}
+              getActiveVariant={context.getActiveVariant}
             />
           )}
         </ExperimentConsumer>

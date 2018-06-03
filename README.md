@@ -5,6 +5,7 @@
 [![Standard Version][standard version]](https://github.com/conventional-changelog/standard-version)
 [![Size][size]](https://unpkg.com/react-simple-experiment)
 [![Size gzip][size gzip]](https://unpkg.com/react-simple-experiment)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdanhayden%2Freact-simple-experiment.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdanhayden%2Freact-simple-experiment?ref=badge_shield)
 
 Simple A/B testing for React
 
@@ -192,3 +193,6 @@ MIT
 [render prop]: https://reactjs.org/docs/render-props.html
 [hoc]: https://reactjs.org/docs/higher-order-components.html
 [context]: https://reactjs.org/docs/context.html
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdanhayden%2Freact-simple-experiment.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdanhayden%2Freact-simple-experiment?ref=badge_large)
